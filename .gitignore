@@ -1,0 +1,11 @@
+# Private keys — NEVER commit
+ssh/.ssh/id_*
+ssh/.ssh/known_hosts
+
+# macOS
+.DS_Store
+
+# Editor
+*.swp
+*.swo
+*~
