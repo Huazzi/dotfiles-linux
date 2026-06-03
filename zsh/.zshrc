@@ -123,6 +123,23 @@ alias claude-mem='bun "/home/zzhua/.claude/plugins/cache/thedotmack/claude-mem/1
 # 确保别名也能享受自动补全
 compdef _eza ls ll la
 
+##### Python & uv 配置 #####
+# 使用 uv 管理的 Python 作为默认版本
+export UV_PYTHON_BIN="$HOME/.local/share/uv/python/cpython-3.13.13-linux-x86_64-gnu/bin"
+case ":$PATH:" in
+    *":$UV_PYTHON_BIN:"*) ;;
+    *) PATH="$UV_PYTHON_BIN:$PATH" ;;
+esac
+
+# Alias
+alias ve='uv venv'                    # 创建虚拟环境: ve
+alias va='source .venv/bin/activate'  # 激活虚拟环境: va
+alias vd='deactivate'                 # 退出虚拟环境: vd
+alias uvrun='uv run'                  # 无需激活直接运行
+
+# uv shell completion
+eval "$(uv generate-shell-completion zsh 2>/dev/null)"
+
 ##### bun 配置 #####
 # bun completions
 [ -s "/home/zzhua/.bun/_bun" ] && source "/home/zzhua/.bun/_bun"
