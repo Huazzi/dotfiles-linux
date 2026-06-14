@@ -109,19 +109,25 @@ alias proxy_off='
     echo "Proxy OFF"
 '
 
-##### Alias #####
-# 使用 eza 替代 ls
-alias ls='eza --color=auto --group-directories-first'
-alias ll='eza -lh --git'
-alias la='eza -la'
+##### Eza 配置 (ls 的现代替代品) #####
+if command -v eza >/dev/null 2>&1; then
+    alias ls='eza --color=auto --group-directories-first'
+    alias ll='eza -lah --git'                  # 详细列表，带 Git 状态
+    alias la='eza -a --group-directories-first' # 显示所有文件
+    alias l='eza -l --git'                     # 简洁详细列表
+    alias lt='eza -T --level=2'                # 树形结构 (2层)
+    alias ltf='eza -T --level=4'               # 树形结构 (4层)
+    alias lsi='eza --color=auto --group-directories-first --icons'   # 基础列表 + 图标
+    alias lli='eza -lah --git --icons'         # 详细列表 + 图标
+
+    # 如果 _eza 补全存在则启用
+    (( $+functions[_eza] )) && compdef _eza ls ll la lsi lli
+fi
 
 alias np+='/mnt/d/Applications/Notepad++/notepad++.exe'
 alias code='/mnt/d/DevTool/VSCode/bin/code'
 
 alias claude-mem='bun "/home/zzhua/.claude/plugins/cache/thedotmack/claude-mem/12.3.8/scripts/worker-service.cjs"'
-
-# 确保别名也能享受自动补全
-compdef _eza ls ll la
 
 ##### Python & uv 配置 #####
 # 使用 uv 管理的 Python 作为默认版本
